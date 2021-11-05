@@ -27,9 +27,11 @@ class _ArticleViewState extends State<ArticleView> {
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black87,
       ),
-      body: WebView(
-        gestureNavigationEnabled: true,
-        initialUrl: widget.url,
+      body: SafeArea(
+        child: WebView(
+          gestureNavigationEnabled: true,
+          initialUrl: widget.url,
+        ),
       ),
       extendBodyBehindAppBar: true,
     );
