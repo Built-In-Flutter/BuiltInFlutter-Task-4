@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:news/screen/details/detail_news.dart';
 import 'package:news/screen/profile/profile.dart';
 
 import 'screen/config/themes/themes.dart';

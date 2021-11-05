@@ -11,7 +11,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     AppBar appBar = AppBar(
-      // titleSpacing: MediaQuery.of(context).size.width / 6,
+      titleSpacing: 50,
       backgroundColor: Colors.transparent,
       foregroundColor: Colors.black87,
       elevation: 0,
