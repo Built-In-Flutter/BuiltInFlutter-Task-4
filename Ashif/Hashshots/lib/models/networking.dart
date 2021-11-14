@@ -2,7 +2,7 @@ import 'dart:convert'; // for decoding json and stuffs
 import 'package:http/http.dart' as http;
 class NetworkHelper {
   String url ="https://newsapi.org/v2/top-headlines?country=in&apiKey=";
-  String apiKey="82c942c4c677464da998b147d4a7349a";
+  String apiKey="API KEY";
   Future getData() async {
     http.Response response = await http.get(Uri.parse(url+apiKey));
     if (response.statusCode == 200) {
