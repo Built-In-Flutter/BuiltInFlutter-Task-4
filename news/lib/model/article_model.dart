@@ -69,13 +69,13 @@ class ArticleElement {
 
   Map<String, dynamic> toJson() => {
         // "source": source.toJson(),
-        "author": author == null ? null : author,
+        "author": (author == null) ? null : author,
         "title": title,
         "description": description,
         "url": url,
         "urlToImage": urlToImage,
         "publishedAt": publishedAt.toIso8601String(),
-        "content": content == null ? null : content,
+        "content": (content == null) ? null : content,
       };
 }
 

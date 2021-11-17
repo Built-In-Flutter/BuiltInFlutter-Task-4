@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:news/screen/home/widgets/custom_appbar.dart';
-
 import 'widgets/category_list.dart';
 import 'widgets/recent_news.dart';
 
@@ -12,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String category = "General";
+  String? category = "General";
   void updateCategory(newCategory) {
     setState(() {
       category = newCategory;
@@ -36,13 +35,12 @@ class _HomePageState extends State<HomePage> {
                 child: CategoryList(
                   onCategoryChanged: (String category) {
                     updateCategory(category);
-                  },
-                  currentCategory: category,
+                  }, currentCategory: '',
                 ),
               ),
               RecentNews(
                 screenWidth: screenWidth,
-                category: category,
+                category: category ?? "General",
               ),
             ],
           ),

@@ -5,11 +5,9 @@ typedef IntCallBack = void Function(String category);
 
 class CategoryList extends StatefulWidget {
   final IntCallBack onCategoryChanged;
-  final String currentCategory;
   const CategoryList({
     Key? key,
     required this.onCategoryChanged,
-    required this.currentCategory
   }) : super(key: key);
 
   @override
@@ -43,7 +41,7 @@ class _CategoryListState extends State<CategoryList> {
                 child: Text(
                   type,
                   style: GoogleFonts.poppins(
-                      color: (widget.currentCategory==type)?Colors.black87 : Colors.black54, fontWeight: FontWeight.w500),
+                      color: Colors.black54, fontWeight: FontWeight.w500),
                 ),
               ),
             );
