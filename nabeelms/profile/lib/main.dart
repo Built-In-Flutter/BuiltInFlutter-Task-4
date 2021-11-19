@@ -20,28 +20,27 @@ class MyApp extends StatelessWidget {
       backgroundColor: Colors.white,
       body: HomePage(),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Text(
-          "Profile",
-          style: TextStyle(fontSize: 30, color: Colors.black),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => const NewsUi()));
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(15.0),
-              child: Text(
-                'Projects ',
-                style: TextStyle(color: Colors.blue, fontSize: 20),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: const Text(
+            "Profile",
+            style: TextStyle(fontSize: 30, color: Colors.black),
+          ),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => NewsUi()));
+              },
+              child: Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Text(
+                  'Projects ',
+                  style: TextStyle(color: Colors.blue, fontSize: 20),
+                ),
               ),
-            ),
-          )
-        ],
-      ),
+            )
+          ]),
     );
   }
 }

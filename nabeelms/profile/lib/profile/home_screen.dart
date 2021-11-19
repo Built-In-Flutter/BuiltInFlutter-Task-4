@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'circle_avatar_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({
+   HomePage({
     Key? key,
   }) : super(key: key);
 
@@ -25,13 +25,13 @@ class _HomePageState extends State<HomePage> {
             Center(
               child: Column(
                 children: [
-                  const CircleAvatarWidget(
+                   CircleAvatarWidget(
                     height: 200,
                     width: 200,
                     radius: 2500,
                     iconImage: "assets/Nabeel.jpg",
                   ),
-                  const SizedBox(
+                    SizedBox(
                     height: 15,
                   ),
                   Text(
@@ -44,11 +44,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(
                     width: 150,
-                    child: const Divider(
+                    child: Divider(
                       thickness: 2,
                     ),
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 10,
                   ),
                  Container(
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                    child: Column(
                      children: [
                        Row(
-                         children: const [
+                         children:  [
                            Text(
                              "Hi, I am a ",
                              style: TextStyle(fontSize: 20),
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                          ],
                        ),
                        Row(
-                         children: const [
+                         children:  [
                            Text(
                              "Kollam, Kerala. Connect, If You like to\nwork with me.",
                              style: TextStyle(fontSize: 20),
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     height: 50,
                     width: 350,
-                    child: const Divider(
+                    child:  Divider(
                       thickness: 2,
                     ),
                   ),
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                       launch(
                           "mailto:nabeel.ms78@gmail.com?subject=&body=");
                     },
-                    child: const ListTile(
+                    child:  ListTile(
                       title: Text("nabeel.ms78@gmail.com"),
                       leading: CircleAvatarWidget(
                         width: 40,
@@ -108,14 +108,14 @@ class _HomePageState extends State<HomePage> {
                     ),
 
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 10,
                   ),
                   GestureDetector(
                     onTap: () {
                       launch("https://github.com/NabeelMS01");
                     },
-                    child: const ListTile(
+                    child:  ListTile(
                       title: Text("https://github.com/NabeelMS01"),
                       leading: CircleAvatarWidget(
                         width: 40,
@@ -125,10 +125,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  const SizedBox(
+                   SizedBox(
                     height: 10,
                   ),
-                  const ListTile(
+                   ListTile(
                     title: Text("+91-7012237***"),
                     leading: CircleAvatarWidget(
                       width: 40,

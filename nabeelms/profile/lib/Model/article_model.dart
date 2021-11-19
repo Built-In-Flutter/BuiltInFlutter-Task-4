@@ -32,7 +32,7 @@ class Articles {
     required this.title,
     this.description,
     required this.url,
-    this.urlToImage,
+  required this.urlToImage,
     required this.publishedAt,
     this.content,
   });
@@ -79,7 +79,7 @@ class Source {
   late final String name;
 
   Source.fromJson(Map<String, dynamic> json){
-    id = null;
+    id =  json['id'];
     name = json['name'];
   }
 

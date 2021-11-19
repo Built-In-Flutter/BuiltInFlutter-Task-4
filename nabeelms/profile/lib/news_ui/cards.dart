@@ -4,11 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'news_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-
 class NewsHorizontalCards extends StatelessWidget {
-
-
   final String title;
 
   final String url;
@@ -16,13 +12,9 @@ class NewsHorizontalCards extends StatelessWidget {
   final String? urlToImage;
   final String publishedAt;
 
-
-  const NewsHorizontalCards({
-
+  NewsHorizontalCards({
     required this.url,
-
     required this.publishedAt,
-
     required this.title,
     required this.urlToImage,
   });
@@ -30,7 +22,7 @@ class NewsHorizontalCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 20, left: 15),
+      margin: EdgeInsets.only(top: 20, left: 15),
       width: 330,
       height: 360,
       decoration: BoxDecoration(
@@ -46,14 +38,12 @@ class NewsHorizontalCards extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(20.0),
               child: Row(
-                children: const [
-
+                children: [
                   SizedBox(
                     width: 10,
                   ),
-
                 ],
               ),
             ),
@@ -65,7 +55,7 @@ class NewsHorizontalCards extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: ClipRRect(
-                borderRadius: const BorderRadius.only(
+                borderRadius: BorderRadius.only(
                     topRight: Radius.circular(20),
                     topLeft: Radius.circular(20)),
                 child: Image.network(
@@ -82,10 +72,10 @@ class NewsHorizontalCards extends StatelessWidget {
                 title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 21),
+                style: TextStyle(fontSize: 21),
               ),
             ),
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
             SizedBox(
@@ -96,14 +86,13 @@ class NewsHorizontalCards extends StatelessWidget {
                     "$publishedAt ",
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 20,
                   ),
                   MyBullet(),
-                  const SizedBox(
+                  SizedBox(
                     width: 10,
                   ),
-
                 ],
               ),
             )
@@ -113,36 +102,29 @@ class NewsHorizontalCards extends StatelessWidget {
     );
   }
 
-  void _launchURL() async =>
-      await canLaunch(url) ? await launch(url) : Fluttertoast.showToast(
-        msg: "couldn't find the url $url",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.SNACKBAR,
-        backgroundColor: Colors.blueGrey,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
-
-
+  void _launchURL() async => await canLaunch(url)
+      ? await launch(url)
+      : Fluttertoast.showToast(
+          msg: "couldn't find the url $url",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: Colors.blueGrey,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
 }
 
 class NewsVerticalCards extends StatelessWidget {
-
   final String? title;
   final String? description;
   final String? url;
-
   final String? urlToImage;
   final String? publishedAt;
-
-
 
   NewsVerticalCards({
     required this.url,
     required this.description,
-
     required this.publishedAt,
-
     required this.title,
     required this.urlToImage,
   });
@@ -154,38 +136,36 @@ class NewsVerticalCards extends StatelessWidget {
         _launchURL();
       },
       child: Container(
-        margin: const EdgeInsets.only(top: 20),
+        margin: EdgeInsets.only(top: 20,left: 12,right: 12),
         width: 350,
         height: 200,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.shade400, width: .5),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: ListView(
+        scrollDirection: Axis.horizontal,
           children: [
             ClipRRect(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  urlToImage!,
-                  fit: BoxFit.cover,
-                  width: 120,
-                  height: 170,
-                ),
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(20)),
+              child: Image.network(
+                "${urlToImage!}",
+                fit: BoxFit.cover,
+                width: 120,
+                height: 100,
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 15),
-              width: 200,
+              margin: EdgeInsets.only(top: 15,left: 10),
+              width: 260,
               child: Column(
                 children: [
                   Text(
                     title!,
-                    style: const TextStyle(fontSize: 20, overflow: TextOverflow.fade),
+                    style: TextStyle(fontSize: 20, overflow: TextOverflow.fade),
                   ),
-
-
                 ],
               ),
             )
@@ -193,14 +173,16 @@ class NewsVerticalCards extends StatelessWidget {
         ),
       ),
     );
-  }  void _launchURL() async =>
-      await canLaunch(url!) ? await launch(url!) : Fluttertoast.showToast(
-        msg: "couldn't find the url $url",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.SNACKBAR,
-        backgroundColor: Colors.blueGrey,
-        textColor: Colors.white,
-        fontSize: 16.0,
-      );
+  }
 
+  void _launchURL() async => await canLaunch(url!)
+      ? await launch(url!)
+      : Fluttertoast.showToast(
+          msg: "couldn't find the url $url",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: Colors.blueGrey,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
 }
