@@ -143,7 +143,7 @@ class _NewsVerticalCardsState extends State<NewsVerticalCards> {
       },
       child: Container(
         margin: EdgeInsets.only(top: 20,left: 12,right: 12),
-        width: 350,
+        width: 280,
         height: 200,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.shade400, width: .5),

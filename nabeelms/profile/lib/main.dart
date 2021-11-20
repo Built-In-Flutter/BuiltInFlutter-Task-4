@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(15.0),
                 child: Text(
-                  'Projects ',
+                  'News App ',
                   style: TextStyle(color: Colors.blue, fontSize: 20),
                 ),
               ),

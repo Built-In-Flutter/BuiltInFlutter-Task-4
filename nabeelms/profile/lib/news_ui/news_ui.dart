@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -40,32 +42,6 @@ class _NewsUiState extends State<NewsUi> {
             ),
           ),
           actions: [
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    "WELCOME",
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Emilia Bubu",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 21,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
             Padding(
               padding: EdgeInsets.all(15.0),
               child: Container(
@@ -90,6 +66,7 @@ class _NewsUiState extends State<NewsUi> {
 }
 
 class NewsHome extends StatefulWidget {
+
   @override
   State<NewsHome> createState() => _NewsHomeState();
 }
@@ -142,35 +119,26 @@ class _NewsHomeState extends State<NewsHome> {
               child: FutureBuilder<Article>(
                   future: News().getNews(),
                   builder: (
-                    context,
+                     context,
                     snapshot,
-                  ) {
-                    if (snapshot.data == null) {
-                      return Container();
-                    } else if (snapshot.hasData) {
-                      return ListView.builder(
-                          itemCount: snapshot.data!.articles.length,
-                          scrollDirection: Axis.horizontal,
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            var data = snapshot.data!.articles[index];
-                            print(
-                              data.urlToImage.toString(),
-                            );
-                            return NewsHorizontalCards(
-                              title: data.title.toString(),
-                              urlToImage: data.urlToImage.toString(),
-                              publishedAt: data.publishedAt.toString(),
-                              url: data.url.toString(),
-                            );
-                          });
-                    } else if (snapshot.hasError) {
-                      Fluttertoast.showToast(
-                          msg: "Error"
-                             );
-                    }throw  Fluttertoast.showToast(
-                        msg: "Error, Try restarting the App");
-                  }),
+                  ) { return  ListView.builder(
+                        itemCount: snapshot.data!.articles.length,
+                        scrollDirection: Axis.horizontal,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          var data = snapshot.data!.articles[index];
+                          print(
+                            data.urlToImage.toString(),
+                          );
+                          return NewsHorizontalCards(
+                            title: data.title.toString(),
+                            urlToImage: data.urlToImage.toString(),
+                            publishedAt: data.publishedAt.toString(),
+                            url: data.url.toString(),
+                          );
+                        });
+                  }
+                  ),
             ),
             Container(
               margin: EdgeInsets.only(left: 20, top: 20),
@@ -180,41 +148,52 @@ class _NewsHomeState extends State<NewsHome> {
                 style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
             ),
-            FutureBuilder<Article>(
+           FutureBuilder<Article>(
                 future: News().getNews(),
                 builder: (
-                  context,
+                  BuildContext context,
                   snapshot,
-                ) {
-                  if (snapshot.data == null) {
-                    return Container();
-                  } else if(snapshot.hasData){
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: snapshot.data!.articles.length - 1,
-                        scrollDirection: Axis.vertical,
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          var data = snapshot.data!.articles[index];
-                          print(
-                            data.urlToImage.toString(),
-                          );
-                          return SizedBox(
-                            child: NewsVerticalCards(
-                              description: data.description.toString(),
-                              title: data.title.toString(),
-                              urlToImage: data.urlToImage.toString(),
-                              publishedAt: data.publishedAt.toString(),
-                              url: data.url.toString(),
-                            ),
-                          );
-                        });
-                  }else if(snapshot.hasError){
-                    Fluttertoast.showToast(msg: "Error");
-                  } throw  Fluttertoast.showToast(msg: "Error,Try restarting the App");
-                }),
+                ){ return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.articles.length - 1,
+                      scrollDirection: Axis.vertical,
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        var data = snapshot.data!.articles[index];
+                        print(
+                          data.urlToImage.toString(),
+                        );
+                        return NewsVerticalCards(
+                          description: data.description.toString(),
+                          title: data.title.toString(),
+                          urlToImage: data.urlToImage.toString(),
+                          publishedAt: data.publishedAt.toString(),
+                          url: data.url.toString(),
+                        );
+                      });
+                }
+
+                ),
           ]),
     );
   }
 }
 
+class MyBullet extends StatefulWidget {
+  @override
+  State<MyBullet> createState() => _MyBulletState();
+}
+
+class _MyBulletState extends State<MyBullet> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 5.0,
+      width: 5.0,
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        shape: BoxShape.circle,
+      ),
+    );
+  }
+}
