@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'news_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class NewsHorizontalCards extends StatelessWidget {
+class NewsHorizontalCards extends StatefulWidget {
   final String title;
 
   final String url;
@@ -19,6 +19,11 @@ class NewsHorizontalCards extends StatelessWidget {
     required this.urlToImage,
   });
 
+  @override
+  State<NewsHorizontalCards> createState() => _NewsHorizontalCardsState();
+}
+
+class _NewsHorizontalCardsState extends State<NewsHorizontalCards> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,7 +64,7 @@ class NewsHorizontalCards extends StatelessWidget {
                     topRight: Radius.circular(20),
                     topLeft: Radius.circular(20)),
                 child: Image.network(
-                  urlToImage!,
+                  widget.urlToImage!,
                   fit: BoxFit.cover,
                   width: 300,
                   height: 180,
@@ -69,7 +74,7 @@ class NewsHorizontalCards extends StatelessWidget {
             SizedBox(
               width: 310,
               child: Text(
-                title,
+                widget.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontSize: 21),
@@ -83,16 +88,12 @@ class NewsHorizontalCards extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "$publishedAt ",
+                    "${widget.publishedAt} ",
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  MyBullet(),
-                  SizedBox(
-                    width: 10,
-                  ),
+
+
+
                 ],
               ),
             )
@@ -102,10 +103,10 @@ class NewsHorizontalCards extends StatelessWidget {
     );
   }
 
-  void _launchURL() async => await canLaunch(url)
-      ? await launch(url)
+  void _launchURL() async => await canLaunch(widget.url)
+      ? await launch(widget.url)
       : Fluttertoast.showToast(
-          msg: "couldn't find the url $url",
+          msg: "couldn't find the url ${widget.url}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.SNACKBAR,
           backgroundColor: Colors.blueGrey,
@@ -114,7 +115,7 @@ class NewsHorizontalCards extends StatelessWidget {
         );
 }
 
-class NewsVerticalCards extends StatelessWidget {
+class NewsVerticalCards extends StatefulWidget {
   final String? title;
   final String? description;
   final String? url;
@@ -129,6 +130,11 @@ class NewsVerticalCards extends StatelessWidget {
     required this.urlToImage,
   });
 
+  @override
+  State<NewsVerticalCards> createState() => _NewsVerticalCardsState();
+}
+
+class _NewsVerticalCardsState extends State<NewsVerticalCards> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -151,7 +157,7 @@ class NewsVerticalCards extends StatelessWidget {
                   topRight: Radius.circular(20),
                   topLeft: Radius.circular(20)),
               child: Image.network(
-                "${urlToImage!}",
+                "${widget.urlToImage!}",
                 fit: BoxFit.cover,
                 width: 120,
                 height: 100,
@@ -163,7 +169,7 @@ class NewsVerticalCards extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    title!,
+                    widget.title!,
                     style: TextStyle(fontSize: 20, overflow: TextOverflow.fade),
                   ),
                 ],
@@ -175,10 +181,10 @@ class NewsVerticalCards extends StatelessWidget {
     );
   }
 
-  void _launchURL() async => await canLaunch(url!)
-      ? await launch(url!)
+  void _launchURL() async => await canLaunch(widget.url!)
+      ? await launch(widget.url!)
       : Fluttertoast.showToast(
-          msg: "couldn't find the url $url",
+          msg: "couldn't find the url ${widget.url}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.SNACKBAR,
           backgroundColor: Colors.blueGrey,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:untitled/api/news.dart';
 
 import 'cards.dart';
@@ -87,14 +89,18 @@ class _NewsUiState extends State<NewsUi> {
   }
 }
 
-class NewsHome extends StatelessWidget {
+class NewsHome extends StatefulWidget {
+  @override
+  State<NewsHome> createState() => _NewsHomeState();
+}
+
+class _NewsHomeState extends State<NewsHome> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: ListView(
           scrollDirection: Axis.vertical,
           physics: BouncingScrollPhysics(),
-
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -139,7 +145,9 @@ class NewsHome extends StatelessWidget {
                     context,
                     snapshot,
                   ) {
-                    if (snapshot.hasData) {
+                    if (snapshot.data == null) {
+                      return Container();
+                    } else if (snapshot.hasData) {
                       return ListView.builder(
                           itemCount: snapshot.data!.articles.length,
                           scrollDirection: Axis.horizontal,
@@ -156,9 +164,12 @@ class NewsHome extends StatelessWidget {
                               url: data.url.toString(),
                             );
                           });
-                    } else {
-                      return Container();
-                    }
+                    } else if (snapshot.hasError) {
+                      Fluttertoast.showToast(
+                          msg: "Error"
+                             );
+                    }throw  Fluttertoast.showToast(
+                        msg: "Error, Try restarting the App");
                   }),
             ),
             Container(
@@ -175,8 +186,11 @@ class NewsHome extends StatelessWidget {
                   context,
                   snapshot,
                 ) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(shrinkWrap: true,
+                  if (snapshot.data == null) {
+                    return Container();
+                  } else if(snapshot.hasData){
+                    return ListView.builder(
+                        shrinkWrap: true,
                         itemCount: snapshot.data!.articles.length - 1,
                         scrollDirection: Axis.vertical,
                         physics: BouncingScrollPhysics(),
@@ -195,26 +209,12 @@ class NewsHome extends StatelessWidget {
                             ),
                           );
                         });
-                  } else {
-                    return Container();
-                  }
-
+                  }else if(snapshot.hasError){
+                    Fluttertoast.showToast(msg: "Error");
+                  } throw  Fluttertoast.showToast(msg: "Error,Try restarting the App");
                 }),
           ]),
     );
   }
 }
 
-class MyBullet extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 5.0,
-      width: 5.0,
-      decoration: BoxDecoration(
-        color: Colors.grey,
-        shape: BoxShape.circle,
-      ),
-    );
-  }
-}
