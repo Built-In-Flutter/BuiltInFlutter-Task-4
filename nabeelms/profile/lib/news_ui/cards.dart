@@ -91,9 +91,6 @@ class _NewsHorizontalCardsState extends State<NewsHorizontalCards> {
                     "${widget.publishedAt} ",
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
-
-
-
                 ],
               ),
             )
@@ -137,48 +134,41 @@ class NewsVerticalCards extends StatefulWidget {
 class _NewsVerticalCardsState extends State<NewsVerticalCards> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        _launchURL();
-      },
-      child: Container(
-        margin: EdgeInsets.only(top: 20,left: 12,right: 12),
-        width: 280,
+    return Container(
+        margin: EdgeInsets.only(top: 20, left: 12, right: 12),
         height: 200,
+        width: 100,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey.shade400, width: .5),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: ListView(
-        scrollDirection: Axis.horizontal,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  topLeft: Radius.circular(20)),
-              child: Image.network(
-                "${widget.urlToImage!}",
-                fit: BoxFit.cover,
-                width: 120,
-                height: 100,
-              ),
+        child: ListTile(onTap:() {
+    _launchURL();
+    },
+          title: Container(
+            margin: EdgeInsets.only(top: 15, left: 10),
+            width: 260,
+            child: Column(
+              children: [
+                Text(
+                  widget.title!,
+                  style: TextStyle(fontSize: 20, overflow: TextOverflow.fade),
+                ),
+              ],
             ),
-            Container(
-              margin: EdgeInsets.only(top: 15,left: 10),
-              width: 260,
-              child: Column(
-                children: [
-                  Text(
-                    widget.title!,
-                    style: TextStyle(fontSize: 20, overflow: TextOverflow.fade),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+          ),
+          leading: Container(
+
+            width: 100,
+            height: 300,
+            child: Image.network(
+              widget.urlToImage!,
+              fit: BoxFit.cover,
+              width: 120,
+              height: 300,
+            ),
+          ),
+        ));
   }
 
   void _launchURL() async => await canLaunch(widget.url!)

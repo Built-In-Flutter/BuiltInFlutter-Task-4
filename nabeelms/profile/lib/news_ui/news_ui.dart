@@ -28,7 +28,7 @@ class _NewsUiState extends State<NewsUi> {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          toolbarHeight: 100,
+          toolbarHeight: 80,
           backgroundColor: Colors.white,
           elevation: 0,
           leading: Builder(
@@ -41,22 +41,6 @@ class _NewsUiState extends State<NewsUi> {
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
           ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.all(15.0),
-              child: Container(
-                width: 70,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  image: DecorationImage(
-                    image: AssetImage("assets/user.jpg"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-          ],
         ),
         drawer: Drawer(),
         body: NewsHome(),
@@ -66,7 +50,6 @@ class _NewsUiState extends State<NewsUi> {
 }
 
 class NewsHome extends StatefulWidget {
-
   @override
   State<NewsHome> createState() => _NewsHomeState();
 }
@@ -119,26 +102,37 @@ class _NewsHomeState extends State<NewsHome> {
               child: FutureBuilder<Article>(
                   future: News().getNews(),
                   builder: (
-                     context,
+                    context,
                     snapshot,
-                  ) { return  ListView.builder(
-                        itemCount: snapshot.data!.articles.length,
-                        scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          var data = snapshot.data!.articles[index];
-                          print(
-                            data.urlToImage.toString(),
-                          );
-                          return NewsHorizontalCards(
-                            title: data.title.toString(),
-                            urlToImage: data.urlToImage.toString(),
-                            publishedAt: data.publishedAt.toString(),
-                            url: data.url.toString(),
-                          );
-                        });
-                  }
-                  ),
+                  ) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          itemCount: snapshot.data!.articles.length,
+                          scrollDirection: Axis.horizontal,
+                          physics: BouncingScrollPhysics(),
+                          itemBuilder: (BuildContext context, int index) {
+                            var data = snapshot.data!.articles[index];
+                            print(
+                              data.urlToImage.toString(),
+                            );
+                            return NewsHorizontalCards(
+                              title: data.title.toString(),
+                              urlToImage: data.urlToImage.toString(),
+                              publishedAt: data.publishedAt.toString(),
+                              url: data.url.toString(),
+                            );
+                          });
+                    } else if (snapshot.hasError) {
+                      return Text(snapshot.error.toString());
+                    } else {
+                      return Center(
+                        child: Container(padding: EdgeInsets.all(20),
+                            height: 70,
+                            width: 70,
+                            child: CircularProgressIndicator()),
+                      );
+                    }
+                  }),
             ),
             Container(
               margin: EdgeInsets.only(left: 20, top: 20),
@@ -148,32 +142,40 @@ class _NewsHomeState extends State<NewsHome> {
                 style: TextStyle(fontSize: 18, color: Colors.grey),
               ),
             ),
-           FutureBuilder<Article>(
+            FutureBuilder<Article>(
                 future: News().getNews(),
                 builder: (
-                  BuildContext context,
+                  context,
                   snapshot,
-                ){ return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.articles.length - 1,
-                      scrollDirection: Axis.vertical,
-                      physics: BouncingScrollPhysics(),
-                      itemBuilder: (BuildContext context, int index) {
-                        var data = snapshot.data!.articles[index];
-                        print(
-                          data.urlToImage.toString(),
-                        );
-                        return NewsVerticalCards(
-                          description: data.description.toString(),
-                          title: data.title.toString(),
-                          urlToImage: data.urlToImage.toString(),
-                          publishedAt: data.publishedAt.toString(),
-                          url: data.url.toString(),
-                        );
-                      });
-                }
+                ) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.articles.length - 1,
+                        scrollDirection: Axis.vertical,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          var data = snapshot.data!.articles[index];
 
-                ),
+                          return NewsVerticalCards(
+                            description: data.description.toString(),
+                            title: data.title.toString(),
+                            urlToImage: data.urlToImage.toString(),
+                            publishedAt: data.publishedAt.toString(),
+                            url: data.url.toString(),
+                          );
+                        });
+                  } else if (snapshot.hasError) {
+                    return Text(snapshot.error.toString());
+                  } else {
+                    return Center(
+                      child: Container(padding: EdgeInsets.all(20),
+                          height: 70,
+                          width: 70,
+                          child: CircularProgressIndicator()),
+                    );
+                  }
+                }),
           ]),
     );
   }
