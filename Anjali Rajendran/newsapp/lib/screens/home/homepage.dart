@@ -28,8 +28,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // CustomAppBar(),
-              // TitleBar(screenWidth: screenWidth),
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
                 child: CategoryList(
