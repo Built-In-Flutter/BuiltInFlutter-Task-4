@@ -46,8 +46,6 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: const [Icon(Icons.search, size: 30)],
     );
 
-    // height == appBar.preferredSize.height;
-    // print("\nHeight " + height.toString() + "\n");
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 13, right: 13),
       child: appBar,
