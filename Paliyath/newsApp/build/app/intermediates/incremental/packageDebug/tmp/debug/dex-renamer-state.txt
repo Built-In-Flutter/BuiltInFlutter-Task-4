@@ -1,0 +1,4 @@
+#Sun Dec 05 19:23:56 IST 2021
+base.0=D\:\\Github-forks\\BuiltInFlutter-Task-4\\Alen Thomas Varughese\\newsApp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
